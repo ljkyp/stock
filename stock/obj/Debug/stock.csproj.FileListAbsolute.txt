@@ -1,0 +1,12 @@
+D:\실습\stock\stock\obj\Debug\stock.csprojResolveAssemblyReference.cache
+D:\실습\stock\stock\obj\Debug\stock.Properties.Resources.resources
+D:\실습\stock\stock\obj\Debug\stock.StockMain.resources
+D:\실습\stock\stock\obj\Debug\stock.csproj.GenerateResource.cache
+D:\실습\stock\stock\obj\Debug\stock.csproj.CoreCompileInputs.cache
+D:\실습\stock\stock\bin\Debug\stock.exe.config
+D:\실습\stock\stock\bin\Debug\stock.exe
+D:\실습\stock\stock\bin\Debug\stock.pdb
+D:\실습\stock\stock\obj\Debug\stock.exe
+D:\실습\stock\stock\obj\Debug\stock.pdb
+D:\실습\stock\stock\obj\Debug\stock.Login.resources
+D:\실습\stock\stock\obj\Debug\stock.Products.resources
