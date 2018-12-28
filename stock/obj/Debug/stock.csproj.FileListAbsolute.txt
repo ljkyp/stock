@@ -10,3 +10,15 @@ D:\실습\stock\stock\obj\Debug\stock.exe
 D:\실습\stock\stock\obj\Debug\stock.pdb
 D:\실습\stock\stock\obj\Debug\stock.Login.resources
 D:\실습\stock\stock\obj\Debug\stock.Products.resources
+D:\CodeSource\stock\stock\obj\Debug\stock.csprojResolveAssemblyReference.cache
+D:\CodeSource\stock\stock\obj\Debug\stock.Login.resources
+D:\CodeSource\stock\stock\obj\Debug\stock.Products.resources
+D:\CodeSource\stock\stock\obj\Debug\stock.Properties.Resources.resources
+D:\CodeSource\stock\stock\obj\Debug\stock.StockMain.resources
+D:\CodeSource\stock\stock\obj\Debug\stock.csproj.GenerateResource.cache
+D:\CodeSource\stock\stock\obj\Debug\stock.csproj.CoreCompileInputs.cache
+D:\CodeSource\stock\stock\obj\Debug\stock.exe
+D:\CodeSource\stock\stock\obj\Debug\stock.pdb
+D:\CodeSource\stock\stock\bin\Debug\stock.exe.config
+D:\CodeSource\stock\stock\bin\Debug\stock.exe
+D:\CodeSource\stock\stock\bin\Debug\stock.pdb

@@ -8,7 +8,7 @@ namespace stock
 {
     class Class1
     {
-        ghgjgj
+   
 
     }
 }
