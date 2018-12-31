@@ -22,13 +22,39 @@ namespace stock
         {
             Products pro = new Products();
             pro.MdiParent = this;
+            pro.StartPosition = FormStartPosition.CenterScreen;
             pro.Show();
 
         }
 
+        //열려있는 모든 폼에서 한번씩 물어보기 때문에 한번만 물어 볼수 있게 close 변수를 사용 
+        bool close = true;
+
         private void StockMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            if (close)
+            {
+                DialogResult result = MessageBox.Show("do you want exit?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    close = false;
+                    Application.Exit();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+     
+        }
+
+        private void stockToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Stock stk = new Stock();
+            stk.MdiParent = this;
+            stk.StartPosition = FormStartPosition.CenterScreen;
+            stk.Show();
         }
     }
 }

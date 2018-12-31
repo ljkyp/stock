@@ -22,3 +22,4 @@ D:\CodeSource\stock\stock\obj\Debug\stock.pdb
 D:\CodeSource\stock\stock\bin\Debug\stock.exe.config
 D:\CodeSource\stock\stock\bin\Debug\stock.exe
 D:\CodeSource\stock\stock\bin\Debug\stock.pdb
+D:\CodeSource\stock\stock\obj\Debug\stock.Stock.resources

@@ -26,42 +26,48 @@ namespace stock
 
         }
 
+        //Add 버튼
         private void button2_Click(object sender, EventArgs e)
         {
-            String constr = "Data Source=124.35.1.165,1516;User ID=svc1adm; Password=#ahnDBadm@2013;";
 
-            SqlConnection con = new SqlConnection(constr);
-            con.Open();
-
-            bool status = false;
-
-            if (ComboBox1.SelectedIndex == 0)
+            if (Validation())
             {
-                status = true;
+                SqlConnection con = Connection.GetConnection();
+                con.Open();
+
+                bool status = false;
+
+                if (ComboBox1.SelectedIndex == 0)
+                {
+                    status = true;
+                }
+
+                String cmdStr = "";
+
+                if (IfProductExists(con, textBox1.Text))
+                {
+                    cmdStr = " UPDATE [commondb].[dbo].[tProducts]" +
+                               "  SET [ProductName] = '" + textBox2.Text + "'" +
+                               "     ,[ProductStatus] = '" + status + "'" +
+                               " WHERE [ProductCode] = '" + textBox1.Text + "'";
+                }
+                else
+                {
+                    cmdStr = "insert into [commondb].[dbo].tProducts(ProductCode, ProductName, ProductStatus)" +
+                        " Values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + status + "')";
+                }
+
+                SqlCommand cmd = new SqlCommand(cmdStr, con);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+
+                LoadData();
+
+                ResetRecord(); 
             }
-
-            String cmdStr = "";
-
-            if (IfProductExists(con, textBox1.Text))
-            {
-                cmdStr = " UPDATE [commondb].[dbo].[tProducts]" +
-                           "  SET [ProductName] = '" + textBox2.Text + "'" +
-                           "     ,[ProductStatus] = '" + status + "'" +
-                           " WHERE [ProductCode] = '" + textBox1.Text + "'";
-            }
-            else
-            {
-                cmdStr = "insert into [commondb].[dbo].tProducts(ProductCode, ProductName, ProductStatus)" +
-                    " Values('" + textBox1.Text + "', '" + textBox2.Text + "', '" + status + "')";
-            }
-
-            SqlCommand cmd = new SqlCommand(cmdStr, con);
-            cmd.ExecuteNonQuery();
-
-            con.Close();
-
-            LoadData();
         }
+
         private bool IfProductExists( SqlConnection con, String ProductCode) {
 
             SqlDataAdapter sda = new SqlDataAdapter("Select * from  [commondb].[dbo].tProducts where ProductCode = " + ProductCode, con);
@@ -79,11 +85,10 @@ namespace stock
             }            
         }
 
+        
         public void LoadData()
         {
-            String constr = "Data Source=124.35.1.165,1516;User ID=svc1adm; Password=#ahnDBadm@2013;";
-
-            SqlConnection con = new SqlConnection(constr);
+            SqlConnection con = Connection.GetConnection();
             con.Open();
 
             SqlDataAdapter sda = new SqlDataAdapter("Select * from [commondb].[dbo].tProducts", con);
@@ -152,35 +157,90 @@ namespace stock
                 {
                     ComboBox1.SelectedIndex = 1;
                 }
+
+                button2.Text = "Update";
             }
 
             
         }
 
+        //Delete버튼
         private void button1_Click(object sender, EventArgs e)
         {
-            String constr = "Data Source=124.35.1.165,1516;User ID=svc1adm; Password=#ahnDBadm@2013;";
 
-            SqlConnection con = new SqlConnection(constr);
-            
-
-            if (IfProductExists(con, textBox1.Text))
+            if (Validation())
             {
-                con.Open();
-                String cmdStr = " DELETE [commondb].[dbo].[tProducts]" +
-                           " WHERE [ProductCode] = '" + textBox1.Text + "'";
-                SqlCommand cmd = new SqlCommand(cmdStr, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
+                DialogResult result = MessageBox.Show("do you want delete?", "message", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    SqlConnection con = Connection.GetConnection();
+
+
+                    if (IfProductExists(con, textBox1.Text))
+                    {
+                        con.Open();
+                        String cmdStr = " DELETE [commondb].[dbo].[tProducts]" +
+                                   " WHERE [ProductCode] = '" + textBox1.Text + "'";
+                        SqlCommand cmd = new SqlCommand(cmdStr, con);
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("not found data", "error message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    LoadData();
+                    ResetRecord();
+                }
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ResetRecord();
+        }
+
+
+
+        private void ResetRecord()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            ComboBox1.SelectedIndex = -1;
+            button2.Text = "Add";
+            errorProvider1.Clear();
+            textBox1.Focus();
+        }
+
+
+        private bool Validation()
+        {
+            bool Result = false;
+
+            if(string.IsNullOrEmpty(textBox1.Text))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(textBox1, "Product Code Required");
+            }
+            else if (string.IsNullOrEmpty(textBox2.Text))
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(textBox2, "Product Name Required");
+            }
+            else if (ComboBox1.SelectedIndex == -1)
+            {
+                errorProvider1.Clear();
+                errorProvider1.SetError(ComboBox1, "Select Status");
             }
             else
             {
-                MessageBox.Show("not found data","error message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Result = true;
             }
 
-            
-
-            LoadData();
+            return Result;
         }
     }
 }

@@ -28,10 +28,10 @@ namespace stock
         private void button2_Click(object sender, EventArgs e)
         {
             //To-do check login and password
-            string strConn = "Data Source=124.35.1.165,1516;User ID=svc1adm; Password=#ahnDBadm@2013;";
+
             String strSql = "Select* from[commondb].[dbo].StaffCode_ct where Stf_Code = '" + textBox1.Text + "' and password = '" + textBox2.Text + "'";
 
-            SqlConnection con = new SqlConnection(strConn);
+            SqlConnection con = Connection.GetConnection();
 
             SqlDataAdapter sda = new SqlDataAdapter("Select * from [commondb].[dbo].StaffCode_ct as aa  where aa.[STF_CODE] = '" + textBox1.Text + "' ", con);
             DataSet dt = new DataSet();
